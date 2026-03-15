@@ -16,4 +16,6 @@ Gemini
 HTML
 JavaScript
 CSS
+PHP
+SQL
 # Kurulum
