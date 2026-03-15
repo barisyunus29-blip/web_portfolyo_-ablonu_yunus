@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giriş Yap - Araba Parçaları Mağazası</title>
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        header {
+            border-bottom: 3px solid #ff0000;
+            padding: 1.5rem 0;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        
+        .nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+        
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+        
+        .nav a:hover {
+            color: #ff0000;
+        }
+        
+        .divider {
+            height: 3px;
+            background: #ff0000;
+            margin: 2rem 0;
+        }
+        
+        .btn {
+            background: #000;
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 0.75rem 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #fff;
+            color: #000;
+        }
+        
+        .btn-block {
+            width: 100%;
+            padding: 1rem;
+        }
+        
+        input, textarea, select {
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+        
+        footer {
+            background: #000;
+            border-top: 3px solid #ff0000;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #fff;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: #ff0000;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            border-top: 2px solid #fff;
+            padding-top: 1rem;
+        }
+        
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 2px solid #fff;
+            font-weight: bold;
+        }
+        
+        .alert-success {
+            background: #00ff00;
+            color: #000;
+        }
+        
+        .alert-error {
+            background: #ff0000;
+            color: #fff;
+        }
+        
+        .alert-warning {
+            background: #ffff00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
+                
+                <nav class="nav">
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <div id="user-menu" style="display: none;">
+                        <span id="user-name" style="margin-right: 1rem;"></span>
+                        <a href="#" id="logout-btn">ÇIKIŞ</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- Giriş Formu -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 500px;">
+            <h1 style="text-align: center; margin-bottom: 2rem; font-size: 2rem;">GİRİŞ YAP</h1>
+            
+            <div id="message-container"></div>
+            
+            <form id="login-form" style="border: 2px solid #fff; padding: 2rem;">
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="email" style="display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 1.1rem;">Email:</label>
+                    <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="password" style="display: block; margin-bottom: 0.5rem; font-weight: bold; font-size: 1.1rem;">Şifre:</label>
+                    <input type="password" id="password" name="password" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <button type="submit" class="btn btn-block" style="margin-bottom: 1rem; font-size: 1.1rem;">GİRİŞ YAP</button>
+                
+                <p style="text-align: center; font-size: 1rem;">
+                    Hesabınız yok mu? <a href="/Web-Projesi2/register.html" style="color: #ff0000; text-decoration: none; font-weight: bold;">Kayıt Ol</a>
+                </p>
+                
+                <hr style="border: none; border-top: 2px solid #fff; margin: 1.5rem 0;">
+                
+                <p style="text-align: center; font-size: 0.9rem; color: #ccc;">
+                    <strong>Demo Hesap:</strong><br>
+                    Email: admin@arabaparçalari.com<br>
+                    Şifre: admin123
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ARABA PARÇALARI</h3>
+                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>KATEGORİLER</h3>
+                    <ul>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İLETİŞİM</h3>
+                    <ul>
+                        <li>Email: info@arabaparçalari.com</li>
+                        <li>Telefon: +90 (555) 123-4567</li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Web-Projesi2/script.js"></script>
+    <script>
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+            
+            console.log('Giriş denemesi:', email, password);
+            
+            if (!email || !password) {
+                showMessage('Lütfen tüm alanları doldurun', 'error');
+                return;
+            }
+            
+            // Demo giriş kontrolü
+            if (email === 'admin@arabaparçalari.com' && password === 'admin123') {
+                currentUser = {
+                    id: 1,
+                    name: 'Admin',
+                    email: email
+                };
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                updateUserUI();
+                showMessage('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/index.html';
+                }, 1500);
+            } else {
+                // Diğer email/şifre kombinasyonları da çalışsın
+                currentUser = {
+                    id: Math.random(),
+                    name: email.split('@')[0],
+                    email: email
+                };
+                localStorage.setItem('user', JSON.stringify(currentUser));
+                updateUserUI();
+                showMessage('Giriş başarılı! Yönlendiriliyorsunuz...', 'success');
+                
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/index.html';
+                }, 1500);
+            }
+        });
+        
+        function showMessage(message, type) {
+            const container = document.getElementById('message-container');
+            const div = document.createElement('div');
+            div.className = `alert alert-${type}`;
+            div.textContent = message;
+            container.innerHTML = '';
+            container.appendChild(div);
+            
+            if (type === 'success') {
+                setTimeout(() => {
+                    div.remove();
+                }, 3000);
+            }
+        }
+    </script>
+</body>
+</html>
