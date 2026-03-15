@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sepet - Araba Parçaları Mağazası</title>
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
+                
+                <nav class="nav">
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <div id="user-menu" style="display: none;">
+                        <span id="user-name"></span>
+                        <a href="#" id="logout-btn">ÇIKIŞ</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- Sepet -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 2rem;">SEPETIM</h1>
+            
+            <div id="cart-items" style="margin-bottom: 2rem;"></div>
+            
+            <div style="border: 2px solid #fff; padding: 2rem; text-align: right;">
+                <h2 style="margin-bottom: 1rem;">Toplam: <span id="cart-total" style="color: #ff0000;">₺0.00</span></h2>
+                <a href="/Web-Projesi2/checkout.html" class="btn" style="display: inline-block; padding: 0.75rem 2rem; background: #000; color: #fff; border: 2px solid #ff0000; font-weight: bold; text-decoration: none; cursor: pointer;">KASA GİT</a>
+                <a href="/Web-Projesi2/products.html" class="btn" style="display: inline-block; padding: 0.75rem 2rem; background: #000; color: #fff; border: 2px solid #fff; font-weight: bold; text-decoration: none; cursor: pointer; margin-left: 1rem;">ALIŞVERIŞE DEVAM ET</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ARABA PARÇALARI</h3>
+                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>KATEGORİLER</h3>
+                    <ul>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İLETİŞİM</h3>
+                    <ul>
+                        <li>Email: info@arabaparçalari.com</li>
+                        <li>Telefon: +90 (555) 123-4567</li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Web-Projesi2/script.js"></script>
+    <script>
+        async function loadCartPage() {
+            if (!currentUser) {
+                showNotification('Lütfen giriş yapın', 'warning');
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/login.html';
+                }, 1500);
+                return;
+            }
+            
+            const cartData = await loadCart();
+            const container = document.getElementById('cart-items');
+            
+            if (cartData && cartData.items && cartData.items.length > 0) {
+                const html = cartData.items.map(item => `
+                    <div style="border: 2px solid #fff; padding: 1.5rem; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0.5rem;">${item.name}</h3>
+                            <p style="margin-bottom: 0.5rem;">Birim Fiyat: <strong>${formatPrice(item.price)}</strong></p>
+                            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                <label style="font-weight: bold;">Miktar:</label>
+                                <input type="number" value="${item.quantity}" min="1" onchange="updateQuantity(${item.id}, this.value)" style="width: 70px; padding: 0.5rem; background: #000; color: #fff; border: 2px solid #fff; font-weight: bold;">
+                            </div>
+                        </div>
+                        <div style="text-align: right; min-width: 200px;">
+                            <p style="font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">Toplam: ${formatPrice(item.price * item.quantity)}</p>
+                            <button onclick="removeItem(${item.id})" style="padding: 0.75rem 1.5rem; background: #ff0000; color: #fff; border: 2px solid #ff0000; font-weight: bold; cursor: pointer; font-size: 1rem;">SİL</button>
+                        </div>
+                    </div>
+                `).join('');
+                
+                container.innerHTML = html;
+                document.getElementById('cart-total').textContent = formatPrice(cartData.total);
+            } else {
+                container.innerHTML = `
+                    <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
+                        <p style="color: #fff; font-size: 1.3rem; margin-bottom: 1rem;">Sepetiniz boş</p>
+                        <a href="/Web-Projesi2/products.html" class="btn" style="display: inline-block; padding: 0.75rem 2rem; background: #000; color: #fff; border: 2px solid #fff; font-weight: bold; text-decoration: none; cursor: pointer;">ÜRÜNLERE GÖZ AT</a>
+                    </div>
+                `;
+                document.getElementById('cart-total').textContent = '₺0.00';
+            }
+        }
+        
+        async function removeItem(productId) {
+            await removeFromCart(productId);
+            loadCartPage();
+        }
+        
+        async function updateQuantity(productId, quantity) {
+            await updateCartItem(productId, quantity);
+            loadCartPage();
+        }
+        
+        window.addEventListener('load', loadCartPage);
+    </script>
+</body>
+</html>
