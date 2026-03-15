@@ -1,158 +1,33 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Araba Parçaları Mağazası</title>
-    <link rel="stylesheet" href="/Web-Projesi2/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Araba Parçaları Mağazası</title>
+<link rel="stylesheet" href="/Web-Projesi2/style.css">
 </head>
+
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
-                
-                <nav class="nav">
-                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
-                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
-                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
-                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
-                    <div id="user-menu" style="display: none;">
-                        <span id="user-name"></span>
-                        <a href="#" id="logout-btn">ÇIKIŞ</a>
-                    </div>
-                </nav>
-            </div>
-            
-            <form id="search-form" class="search-bar">
-                <input type="text" id="search-input" placeholder="Ürün ara...">
-                <button type="submit">ARA</button>
-            </form>
-        </div>
-    </header>
 
-    <div class="divider"></div>
+<header>
+<div class="container">
 
-    <!-- Hero -->
-    <section style="text-align: center; padding: 4rem 0;">
-        <div class="container">
-            <h1>ARABA PARÇALARI MAĞAZASI</h1>
-            <p style="font-size: 1.2rem; margin: 1rem 0;">Kaliteli, Güvenilir, Hızlı Teslimat</p>
-            <div class="divider"></div>
-            <a href="/Web-Projesi2/products.html" class="btn" style="margin-top: 2rem;">ÜRÜNLERI KEŞFET</a>
-        </div>
-    </section>
+<a href="/Web-Projesi2/index.html">ARABA PARÇALARI</a>
 
-    <!-- Kategoriler -->
-    <section style="padding: 4rem 0;">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem;">KATEGORİLER</h2>
-            <div id="categories-grid" class="grid grid-3"></div>
-        </div>
-    </section>
+<nav>
+<a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+<a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+<a href="/Web-Projesi2/cart.html">SEPETİM</a>
+</nav>
 
-    <div class="divider"></div>
+</div>
+</header>
 
-    <!-- Öne Çıkan Ürünler -->
-    <section style="padding: 4rem 0;">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem;">ÖNE ÇIKAN ÜRÜNLER</h2>
-            <div id="featured-products" class="grid grid-4"></div>
-        </div>
-    </section>
+<section>
+<h1>ARABA PARÇALARI MAĞAZASI</h1>
+<p>Kaliteli, Güvenilir, Hızlı Teslimat</p>
+<a href="/Web-Projesi2/products.html">ÜRÜNLERİ KEŞFET</a>
+</section>
 
-    <div class="divider"></div>
-
-    <!-- Neden Biz -->
-    <section style="padding: 4rem 0;">
-        <div class="container">
-            <h2 style="text-align: center; margin-bottom: 3rem;">NEDEN BİZ?</h2>
-            <div class="grid grid-3">
-                <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">KALİTELİ ÜRÜNLER</h3>
-                    <p>Tüm ürünlerimiz orijinal ve yüksek kaliteli malzemelerden üretilmiştir.</p>
-                </div>
-                <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">UYGUN FİYATLAR</h3>
-                    <p>Pazar fiyatlarından en uygun fiyatlarla ürün sunuyoruz.</p>
-                </div>
-                <div style="border: 2px solid #fff; padding: 2rem; text-align: center;">
-                    <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">HIZLI TESLİMAT</h3>
-                    <p>Siparişleriniz 24-48 saat içinde kargoya verilir.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>ARABA PARÇALARI</h3>
-                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>KATEGORİLER</h3>
-                    <ul>
-                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
-                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
-                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
-                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>İLETİŞİM</h3>
-                    <ul>
-                        <li>Email: info@arabaparçalari.com</li>
-                        <li>Telefon: +90 (505) 330-3171</li>
-                        <li>Adres: Kırıkkale, Türkiye</li>
-                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="/Web-Projesi2/script.js"></script>
-    <script>
-        async function loadCategoriesHome() {
-            const categories = await loadCategories();
-            const grid = document.getElementById('categories-grid');
-            
-            if (categories && categories.length > 0) {
-                grid.innerHTML = categories.map(cat => `
-                    <a href="/Web-Projesi2/products.html?category=${cat.id}" style="text-decoration: none;">
-                        <div style="border: 2px solid #fff; padding: 2rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.borderColor='#ff0000'; this.style.backgroundColor='#111';" onmouseout="this.style.borderColor='#fff'; this.style.backgroundColor='transparent';">
-                            <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">${cat.name}</h3>
-                            <p>${cat.description || ''}</p>
-                        </div>
-                    </a>
-                `).join('');
-            }
-        }
-        
-        async function loadFeaturedHome() {
-            const products = await loadFeaturedProducts();
-            const grid = document.getElementById('featured-products');
-            
-            if (products && products.length > 0) {
-                grid.innerHTML = products.map(product => createProductCard(product)).join('');
-            }
-        }
-        
-        window.addEventListener('load', function() {
-            loadCategoriesHome();
-            loadFeaturedHome();
-        });
-    </script>
 </body>
 </html>
-
