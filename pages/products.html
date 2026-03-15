@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünler - Araba Parçaları Mağazası</title>
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
+                
+                <nav class="nav">
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <div id="user-menu" style="display: none;">
+                        <span id="user-name"></span>
+                        <a href="#" id="logout-btn">ÇIKIŞ</a>
+                    </div>
+                </nav>
+            </div>
+            
+            <form id="search-form" class="search-bar">
+                <input type="text" id="search-input" placeholder="Ürün ara...">
+                <button type="submit">ARA</button>
+            </form>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- Ürünler -->
+    <section style="padding: 4rem 0;">
+        <div class="container">
+            <h1 style="text-align: center; margin-bottom: 3rem;">ÜRÜN KATALOĞU</h1>
+            
+            <!-- Filtreleme -->
+            <div style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                <select id="category-filter" style="padding: 0.5rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem;">
+                    <option value="">Tüm Kategoriler</option>
+                </select>
+                <input type="text" id="search-filter" placeholder="Ürün adı ara..." style="padding: 0.5rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; flex: 1;">
+                <button onclick="applyFilters()" class="btn">FİLTRELE</button>
+            </div>
+
+            <div id="products-grid" class="grid grid-4"></div>
+            
+            <!-- Sayfalama -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button onclick="previousPage()" class="btn" style="margin-right: 1rem;">ÖNCEKİ</button>
+                <span id="page-info" style="color: #fff; font-size: 1.1rem;">Sayfa 1</span>
+                <button onclick="nextPage()" class="btn" style="margin-left: 1rem;">SONRAKİ</button>
+            </div>
+        </div>
+    </section>
+    <!-- Eklendi-->
+    <div class="divider"></div>
+    <section class="products">
+    <h2>Araba Yedek Parçaları</h2>
+    <div class="product-list" id="product-list"></div>
+</section>
+
+<script src="script.js"></script>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ARABA PARÇALARI</h3>
+                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>KATEGORİLER</h3>
+                    <ul>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İLETİŞİM</h3>
+                    <ul>
+                        <li>Email: info@arabaparçalari.com</li>
+                        <li>Telefon: +90 (555) 123-4567</li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Web-Projesi2/script.js"></script>
+    <script>
+        let currentPage = 1;
+        let currentCategoryId = null;
+        let currentSearch = null;
+
+        async function loadProductsPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            currentCategoryId = parseInt(urlParams.get('category')) || null;
+            currentSearch = urlParams.get('search') || null;
+            currentPage = parseInt(urlParams.get('page')) || 1;
+
+            const products = await loadProducts(currentPage, currentCategoryId, currentSearch);
+            const grid = document.getElementById('products-grid');
+            
+            if (products && products.length > 0) {
+                grid.innerHTML = products.map(product => createProductCard(product)).join('');
+                document.getElementById('page-info').textContent = `Sayfa ${currentPage}`;
+            } else {
+                grid.innerHTML = '<p style="color: #fff; font-size: 1.2rem; grid-column: 1/-1; text-align: center;">Ürün bulunamadı.</p>';
+            }
+        }
+
+        async function loadCategoriesFilter() {
+            const categories = await loadCategories();
+            const select = document.getElementById('category-filter');
+            
+            if (categories && categories.length > 0) {
+                const options = categories.map(cat => `<option value="${cat.id}">${cat.name}</option>`).join('');
+                select.innerHTML = '<option value="">Tüm Kategoriler</option>' + options;
+            }
+        }
+
+        function applyFilters() {
+            const categoryId = document.getElementById('category-filter').value;
+            const search = document.getElementById('search-filter').value;
+            
+            let url = '/Web-Projesi2/products.html?';
+            if (categoryId) url += `category=${categoryId}&`;
+            if (search) url += `search=${encodeURIComponent(search)}&`;
+            
+            window.location.href = url;
+        }
+
+        function nextPage() {
+            let url = `/Web-Projesi2/products.html?page=${currentPage + 1}`;
+            if (currentCategoryId) url += `&category=${currentCategoryId}`;
+            if (currentSearch) url += `&search=${encodeURIComponent(currentSearch)}`;
+            window.location.href = url;
+        }
+
+        function previousPage() {
+            if (currentPage > 1) {
+                let url = `/Web-Projesi2/products.html?page=${currentPage - 1}`;
+                if (currentCategoryId) url += `&category=${currentCategoryId}`;
+                if (currentSearch) url += `&search=${encodeURIComponent(currentSearch)}`;
+                window.location.href = url;
+            }
+        }
+
+        window.addEventListener('load', function() {
+            loadCategoriesFilter();
+            loadProductsPage();
+        });
+    </script>
+</body>
+</html>
