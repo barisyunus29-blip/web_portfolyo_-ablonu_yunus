@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kasa - Araba Parçaları Mağazası</title>
+    <link rel="stylesheet" href="/Web-Projesi2/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="/Web-Projesi2/index.html" class="logo">ARABA PARÇALARI</a>
+                
+                <nav class="nav">
+                    <a href="/Web-Projesi2/products.html">ÜRÜNLER</a>
+                    <a href="/Web-Projesi2/contact.html">İLETİŞİM</a>
+                    <a href="/Web-Projesi2/cart.html">SEPETİM</a>
+                    <a href="/Web-Projesi2/login.html" id="login-btn">GİRİŞ YAP</a>
+                    <div id="user-menu" style="display: none;">
+                        <span id="user-name"></span>
+                        <a href="#" id="logout-btn">ÇIKIŞ</a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="divider"></div>
+
+    <!-- Kasa -->
+    <section style="padding: 4rem 0;">
+        <div class="container" style="max-width: 600px;">
+            <h1 style="text-align: center; margin-bottom: 2rem;">KASA</h1>
+            
+            <form id="checkout-form" style="border: 2px solid #fff; padding: 2rem;">
+                <h2 style="margin-bottom: 1.5rem;">Teslimat Bilgileri</h2>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="address" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Adres:</label>
+                    <input type="text" id="address" name="address" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="city" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Şehir:</label>
+                    <input type="text" id="city" name="city" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="postal-code" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Posta Kodu:</label>
+                    <input type="text" id="postal-code" name="postal-code" required style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="payment-method" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Ödeme Yöntemi:</label>
+                    <select id="payment-method" name="payment-method" style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box;">
+                        <option value="credit_card">Kredi Kartı</option>
+                        <option value="bank_transfer">Banka Transferi</option>
+                        <option value="cash_on_delivery">Kapıda Ödeme</option>
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 1.5rem;">
+                    <label for="notes" style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Notlar:</label>
+                    <textarea id="notes" name="notes" style="width: 100%; padding: 0.75rem; background: #000; color: #fff; border: 2px solid #fff; font-size: 1rem; box-sizing: border-box; min-height: 100px;"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-block">SİPARİŞ VER</button>
+            </form>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>ARABA PARÇALARI</h3>
+                    <p>Yüksek kaliteli araba parçaları ve aksesuarları için güvenilir kaynağınız.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>KATEGORİLER</h3>
+                    <ul>
+                        <li><a href="/Web-Projesi2/products.html">Motor Parçaları</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Fren Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Elektrik Sistemi</a></li>
+                        <li><a href="/Web-Projesi2/products.html">Süspansiyon</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>İLETİŞİM</h3>
+                    <ul>
+                        <li>Email: info@arabaparçalari.com</li>
+                        <li>Telefon: +90 (555) 123-4567</li>
+                        <li>Adres: İstanbul, Türkiye</li>
+                        <li><a href="/Web-Projesi2/contact.html">İletişim Formu</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Araba Parçaları Mağazası. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Web-Projesi2/script.js"></script>
+    <script>
+        document.getElementById('checkout-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                showNotification('Lütfen giriş yapın', 'warning');
+                window.location.href = '/Web-Projesi2/login.html';
+                return;
+            }
+            
+            const address = document.getElementById('address').value;
+            const city = document.getElementById('city').value;
+            const postalCode = document.getElementById('postal-code').value;
+            const paymentMethod = document.getElementById('payment-method').value;
+            const notes = document.getElementById('notes').value;
+            
+            const order = await createOrder(address, city, postalCode, paymentMethod, notes);
+            
+            if (order) {
+                setTimeout(() => {
+                    window.location.href = '/Web-Projesi2/index.html';
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
